@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SmartAgro Advisor | AI Crop Disease Detection</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2e7d32">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div id="loading" class="overlay hidden">
+    <div class="spinner"></div>
+    <p>Analyzing crop health...<br><small>Using 10,000+ disease patterns</small></p>
+  </div>
+
+  <!-- Main App -->
+  <div id="app">
+    <!-- HOME VIEW -->
+    <div id="home-view" class="view active">
+      <header class="hero">
+        <div class="hero-content">
+          <h1>Spot Crop Diseases Early.<br>Save Your Harvest.</h1>
+          <p>Upload a leaf photo → Get AI diagnosis + organic treatment tips in seconds</p>
+          <button id="scan-btn" class="btn-primary">📸 Scan Crop Now</button>
+          <div class="stats">
+            <div><span>92%</span> Accuracy</div>
+            <div><span>50k+</span> Farmers</div>
+            <div><span>15</span> Languages</div>
+          </div>
+        </div>
+        <div class="hero-img">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e8f5e9'/%3E%3Ccircle cx='100' cy='100' r='40' fill='%234caf50'/%3E%3Ccircle cx='200' cy='100' r='30' fill='%238bc34a'/%3E%3C/svg%3E" alt="Healthy vs diseased crops">
+        </div>
+      </header>
+
+      <section class="features">
+        <div class="card">
+          <div class="icon">🔍</div>
+          <h3>Early Detection</h3>
+          <p>Identify diseases before visible damage spreads</p>
+        </div>
+        <div class="card">
+          <div class="icon">🌱</div>
+          <h3>Eco-Friendly Tips</h3>
+          <p>Organic treatments + precise pesticide guidance</p>
+        </div>
+        <div class="card">
+          <div class="icon">📱</div>
+          <h3>Works Offline</h3>
+          <p>Save reports when internet returns</p>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <h2>Trusted by Farmers Like You</h2>
+        <div class="quote">
+          <p>"Saved my tomato crop from blight! Got treatment tips before symptoms spread."</p>
+          <div class="farmer">- Rajesh K., Maharashtra</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SCAN VIEW -->
+    <div id="scan-view" class="view hidden">
+      <div class="scan-header">
+        <button id="back-home" class="back-btn">← Back</button>
+        <h2>Scan Crop Disease</h2>
+      </div>
+      
+      <div class="upload-area" id="drop-area">
+        <div id="preview-container" class="hidden">
+          <img id="image-preview" src="" alt="Preview">
+          <button id="retake-btn" class="btn-outline">Retake Photo</button>
+        </div>
+        
+        <div id="upload-instructions">
+          <div class="upload-icon">📱</div>
+          <h3>Take or Upload Photo</h3>
+          <p>Clear image of affected leaves in daylight</p>
+          <button id="camera-btn" class="btn-primary">📸 Use Camera</button>
+          <p class="or-divider">or</p>
+          <input type="file" id="file-input" accept="image/*" hidden>
+          <button id="gallery-btn" class="btn-outline">🖼️ Choose from Gallery</button>
+          
+          <div class="tips">
+            <p>✅ Good: Clear close-up, daylight, single leaf</p>
+            <p>❌ Avoid: Blurry, shadows, multiple plants</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS VIEW -->
+    <div id="results-view" class="view hidden">
+      <div class="scan-header">
+        <button id="new-scan-btn" class="back-btn">+ New Scan</button>
+        <h2>Disease Analysis</h2>
+      </div>
+      
+      <div class="results-container">
+        <div class="result-card">
+          <div class="disease-header">
+            <h3 id="disease-name">Late Blight</h3>
+            <div class="confidence-badge">Confidence: <span id="confidence">92%</span></div>
+          </div>
+          
+          <div class="image-comparison">
+            <div>
+              <p>Your Photo</p>
+              <img id="result-image" src="" alt="Uploaded crop">
+            </div>
+            <div>
+              <p>Infected Areas</p>
+              <div class="highlight-overlay">
+                <img id="highlight-image" src="" alt="Highlighted areas">
+                <div class="highlight-box"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="treatment-section">
+            <h4>🚨 Immediate Treatment</h4>
+            <p id="treatment">Spray copper-based fungicide (2g/L water) every 7 days. Remove infected leaves immediately.</p>
+            
+            <h4>🌱 Prevention Tips</h4>
+            <ul id="prevention">
+              <li>Avoid overhead irrigation</li>
+              <li>Space plants for better airflow</li>
+              <li>Apply neem oil weekly as preventive measure</li>
+            </ul>
+            
+            <div class="warning">
+              ⚠️ <strong>Pesticide Alert:</strong> Chlorothalonil banned in your region. Use copper oxychloride instead.
+            </div>
+            
+            <div class="crop-tip">
+              🌾 <strong>Tomato Specific:</strong> Remove lower leaves to reduce humidity near soil.
+            </div>
+          </div>
+          
+          <div class="action-buttons">
+            <button id="save-report" class="btn-primary">💾 Save Report (PDF)</button>
+            <button id="share-whatsapp" class="btn-outline">📱 Share via WhatsApp</button>
+          </div>
+        </div>
+        
+        <div class="next-steps">
+          <h4>Need More Help?</h4>
+          <button class="btn-outline full-width">📞 Call Local Agri-Expert</button>
+          <button class="btn-outline full-width">📚 View Prevention Guide</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>SmartAgro Advisor • Works offline • Data never sold</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Regional Alerts</a>
+      <a href="#">Farmer Community</a>
+    </div>
+  </footer>
+
+  <script src="camera.js"></script>
+  <script src="main.js"></script>
+  <script src="offline.js"></script>
+</body>
+</html>
